@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <h1>Clicker WebApp</h1>
+    <button id="click-button">Click Me!</button>
+    <p>Click Count: <span id="click-count">0</span></p>
+
+    <py-script>
+        from js import document, fetch
+
+        def update_click_count(data):
+            document.getElementById("click-count").innerText = data["click_count"]
+
+        async def click():
+            response = await fetch('/api/click', { 'method': 'POST' })
+            data = await response.json()
+            update_click_count(data)
+
+        document.getElementById("click-button").addEventListener("click", click)
+    </py-script>
+</body>
+</html>
