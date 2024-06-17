@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 import telebot
 
 # Укажите токен вашего бота здесь
-TOKEN = 'YOUR_TELEGRAM_BOT_API_TOKEN'
+TOKEN = '7349866755:AAFxYLj3FiN538wW63W6AkCj76B5hyNzrVk'
 
 # Устанавливаем Webhook URL
-WEBHOOK_URL = 'https://yourdomain.com/webhook'  # Замените на ваш реальный домен
+WEBHOOK_URL = 'https://uh0hhp.onrender.com/webhook'  # Замените на ваш реальный домен
 
 # Создаем экземпляр приложения Flask
 app = Flask(__name__)
