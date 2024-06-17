@@ -40,7 +40,7 @@ def webhook_handler():
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
-    url_button = telebot.types.InlineKeyboardButton(text="Click Me!", url="https://yourdomain.com/clicker")
+    url_button = telebot.types.InlineKeyboardButton(text="Click Me!", url="https://uh0hhp.onrender.com/clicker")
     keyboard.add(url_button)
     bot.send_message(message.chat.id, "Welcome to the Clicker WebApp!", reply_markup=keyboard)
 
