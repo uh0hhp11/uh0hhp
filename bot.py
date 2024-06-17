@@ -1,30 +1,29 @@
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import Updater, CommandHandler, CallbackContext
-import logging
+import telebot
+from telebot import types
 
-TOKEN = '7130288254:AAE4VjerfC21vlLFl6jP5PXjAKXPODwsuaU'
+# Укажите ваш токен здесь
+TOKEN = '7349866755:AAFxYLj3FiN538wW63W6AkCj76B5hyNzrVk'
 
-# Настройка логирования
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Создаем экземпляр бота
+bot = telebot.TeleBot(TOKEN)
 
-def start(update: Update, context: CallbackContext) -> None:
-    keyboard = [
-        [InlineKeyboardButton("Click Me!", url='https://uh0hhp.onrender.com/clicker')]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text('Choose an action:', reply_markup=reply_markup)
+# Обработчик команды /start
+@bot.message_handler(commands=['start'])
+def handle_start(message):
+    # Создаем клавиатуру
+    keyboard = types.InlineKeyboardMarkup()
+    url_button = types.InlineKeyboardButton(text="Click Me!", url="https://uh0hhp.onrender.com/clicker")
+    keyboard.add(url_button)
+    
+    # Отправляем сообщение с клавиатурой
+    bot.send_message(message.chat.id, "Choose an action:", reply_markup=keyboard)
 
-def main() -> None:
-    updater = Updater(TOKEN)
-    dispatcher = updater.dispatcher
+# Обработчик текстовых сообщений
+@bot.message_handler(func=lambda message: True)
+def handle_text(message):
+    # Пример обработчика для текстовых сообщений
+    bot.send_message(message.chat.id, "I don't understand this command.")
 
-    dispatcher.add_handler(CommandHandler("start", start))
-
-    updater.start_polling()
-    logger.info("Bot started polling...")
-    updater.idle()
-
+# Запуск бота
 if __name__ == '__main__':
-    main()
+    bot.polling(none_stop=True)
